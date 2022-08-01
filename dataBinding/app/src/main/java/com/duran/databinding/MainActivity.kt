@@ -1,5 +1,6 @@
 package com.duran.databinding
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.dataBindingEx.text = "DataBinding을 사용해서 바뀐 텍스트"
+        binding.dataBindingEx.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
