@@ -1,5 +1,6 @@
 package com.duran.viewbinding
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.duran.viewbinding.databinding.ActivityMainBinding
@@ -22,5 +23,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.testText.text = "이것은 변경된 텍스트입니다."
+        binding.testText.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
