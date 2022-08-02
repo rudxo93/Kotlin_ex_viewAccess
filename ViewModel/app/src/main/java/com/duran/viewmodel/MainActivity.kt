@@ -3,6 +3,8 @@ package com.duran.viewmodel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.TextView
 
 /*
 ViewModel
@@ -20,36 +22,54 @@ UI컨트롤러(Activity, Fragment)에서 모든 것을 다 하려고 하면 복�
 */
 
 class MainActivity : AppCompatActivity() {
+
+    private var countValue = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.d("MainActivity", "onCreate")
+        Log.e("MainActivity", "onCreate")
+
+        val plusBtn: Button = findViewById(R.id.plus)
+        val minusBtn: Button = findViewById(R.id.minus)
+
+        val resultArea : TextView = findViewById(R.id.result)
+
+        plusBtn.setOnClickListener {
+            countValue++
+            resultArea.text = countValue.toString()
+        }
+
+        minusBtn.setOnClickListener {
+            countValue--
+            resultArea.text = countValue.toString()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d("MainActivity", "onStart")
+        Log.e("MainActivity", "onStart")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("MainActivity", "onResume")
+        Log.e("MainActivity", "onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d("MainActivity", "onPause")
+        Log.e("MainActivity", "onPause")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("MainActivity", "onStop")
+        Log.e("MainActivity", "onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("MainActivity", "onDestroy")
+        Log.e("MainActivity", "onDestroy")
     }
 }
