@@ -1,25 +1,20 @@
-package com.duran.viewbindingandadapter
+package com.duran.viewbindingandadapter.dataBinding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.duran.viewbindingandadapter.R
+import com.duran.viewbindingandadapter.databinding.ActivityDataBindingBinding
 
-/*
-ViewBinding, DataBinding
+class DataBindingActivity : AppCompatActivity() {
 
-RecyclerView를 만들때 Adapter에서 findViewById 형식으로 아이템들을 찾아와서 view에 뿌려준다.
--> 이러한 경우에도 viewBinding과 DataBinding을 이용해서 할 수 있나?
-
-DataBinding + ViewModel + LiveData -> 추후 구현 예정
-*/
-
-class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDataBindingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_data_binding)
         val array = ArrayList<String>()
 
         array.add("a")
@@ -41,10 +36,10 @@ class MainActivity : AppCompatActivity() {
         array.add("e")
         array.add("f")
 
-        val customAdapter = CustomAdapter(array)
+        val customDataAdapter = CustomDataAdapter(array)
 
-        val rv = findViewById<RecyclerView>(R.id.rv)
-        rv.adapter = customAdapter
+        val rv = binding.rv
+        rv.adapter = customDataAdapter
         rv.layoutManager = LinearLayoutManager(this)
     }
 }
