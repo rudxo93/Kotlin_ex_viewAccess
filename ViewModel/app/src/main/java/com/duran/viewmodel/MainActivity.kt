@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 /*
 ViewModel
@@ -23,12 +25,15 @@ UI컨트롤러(Activity, Fragment)에서 모든 것을 다 하려고 하면 복�
 
 class MainActivity : AppCompatActivity() {
 
-    private var countValue = 0
+//    private var countValue = 0
+    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         Log.e("MainActivity", "onCreate")
 
@@ -37,14 +42,21 @@ class MainActivity : AppCompatActivity() {
 
         val resultArea : TextView = findViewById(R.id.result)
 
+        // 초기화를 시켜주어야 한다.
+        resultArea.text = viewModel.countValue.toString()
+
         plusBtn.setOnClickListener {
-            countValue++
-            resultArea.text = countValue.toString()
+//            countValue++
+//            resultArea.text = countValue.toString()
+            viewModel.plus()
+            resultArea.text = viewModel.countValue.toString()
         }
 
         minusBtn.setOnClickListener {
-            countValue--
-            resultArea.text = countValue.toString()
+//            countValue--
+//            resultArea.text = countValue.toString()
+            viewModel.minus()
+            resultArea.text = viewModel.countValue.toString()
         }
     }
 
