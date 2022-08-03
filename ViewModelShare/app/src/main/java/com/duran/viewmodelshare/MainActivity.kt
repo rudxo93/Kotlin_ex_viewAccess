@@ -34,5 +34,15 @@ class MainActivity : AppCompatActivity() {
             viewModel.minus()
             binding.resultArea.text = viewModel.getCount().toString()
         }
+
+        val manager = supportFragmentManager
+
+        binding.showFragment.setOnClickListener {
+            val transaction = manager.beginTransaction()
+            val fragment = TestFragment()
+            transaction.replace(R.id.frameArea, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 }
