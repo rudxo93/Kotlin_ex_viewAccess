@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import com.duran.fragmentviewmodel.databinding.FragmentTestBinding
 
 /*
 공식문서 https://developer.android.com/guide/fragments/lifecycle 를 보게되면
@@ -14,6 +16,10 @@ Fragment에도 라이프사이클이 있다.
 */
 
 class TestFragment : Fragment() {
+
+    private lateinit var binding: FragmentTestBinding
+
+    var countValue = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,7 +37,20 @@ class TestFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         Log.e("TestFragment", "onCreateView")
-        return inflater.inflate(R.layout.fragment_test, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false)
+
+        binding.plus.setOnClickListener {
+            countValue++
+            binding.resultArea.text = countValue.toString()
+        }
+
+        binding.minus.setOnClickListener {
+            countValue--
+            binding.resultArea.text = countValue.toString()
+        }
+
+        return binding.root
     }
 
     override fun onResume() {
