@@ -21,9 +21,22 @@ class MainActivity : AppCompatActivity() {
             viewModel.plusLiveDataValue()
         }
 
+        viewModel.testLiveData.observe(this, Observer {
+            findViewById<TextView>(R.id.textArea).text = it.toString()
+        })
+
+        // viewModel.testLiveData.value = 10 -> activity에서 임의로 값을 수정할 수 없다. viewModel에서만 가능하다.
+
+   /*     findViewById<Button>(R.id.btnArea).setOnClickListener {
+            viewModel.plusLiveDataValue()
+        }
+
         viewModel.testMutableLiveData.observe(this, Observer {
             findViewById<TextView>(R.id.textArea).text = viewModel.testMutableLiveData.value!!.toString()
+            // findViewById<TextView>(R.id.textArea).text = it.toString() -> 위와 같은 방법
         })
+
+        viewModel.testMutableLiveData.value = 10*/
 
     }
 }
